@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>@three-ws/agents: TypeScript SDK for the three.ws v1 Agents API</title>
+<meta name="description" content="TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.">
+<link rel="canonical" href="https://nirholas.github.io/three-ws-agents/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="three.ws">
+<meta property="og:title" content="@three-ws/agents">
+<meta property="og:description" content="TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.">
+<meta property="og:url" content="https://nirholas.github.io/three-ws-agents/">
+<meta property="og:image" content="https://nirholas.github.io/three-ws-agents/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@three-ws/agents">
+<meta name="twitter:description" content="TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.">
+<meta name="twitter:image" content="https://nirholas.github.io/three-ws-agents/og.png">
+<meta name="keywords" content="three.ws, ai-agents, agents, sdk, solana, llm, automation, typescript">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt">
+<link rel="icon" href="https://three.ws/three-ws-mcp-icon.svg" type="image/svg+xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"@three-ws/agents","description":"TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.","codeRepository":"https://github.com/nirholas/three-ws-agents","programmingLanguage":"JavaScript","license":"https://spdx.org/licenses/Apache-2.0.html","version":"0.1.1","url":"https://nirholas.github.io/three-ws-agents/","author":{"@type":"Organization","name":"three.ws","url":"https://three.ws"},"keywords":"three.ws, ai-agents, agents, sdk, solana, llm, automation, typescript"}</script>
+<style>:root{--bg:#fff;--fg:#111418;--mut:#586069;--line:#e3e6ea;--acc:#2563eb;--code:#f4f6f8;--card:#fafbfc}
+@media(prefers-color-scheme:dark){:root{--bg:#0b0d10;--fg:#e8eaed;--mut:#9aa3ad;--line:#232830;--acc:#6ea0ff;--code:#14181d;--card:#10141a}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:var(--acc)}a:focus-visible,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+header.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1100px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font-weight:700;text-decoration:none;color:var(--fg)}
+.bar nav{margin-left:auto;display:flex;gap:16px;font-size:14px}
+.bar nav a{color:var(--mut);text-decoration:none;transition:color .15s}.bar nav a:hover{color:var(--fg)}
+.hero{max-width:1100px;margin:0 auto;padding:48px 16px 24px}
+.hero h1{font-size:clamp(28px,5vw,44px);line-height:1.15;margin:0 0 12px;letter-spacing:-.02em}
+.hero p{color:var(--mut);max-width:70ch;font-size:18px;margin:0 0 24px}
+.install{display:flex;align-items:center;gap:8px;max-width:620px;background:var(--code);border:1px solid var(--line);border-radius:10px;padding:6px 6px 6px 14px}
+.install code{flex:1;overflow-x:auto;white-space:nowrap;font:14px ui-monospace,SFMono-Regular,Menlo,monospace}
+.install button{border:0;background:var(--acc);color:#fff;border-radius:7px;padding:8px 14px;font:600 13px system-ui;cursor:pointer;transition:transform .12s,opacity .12s}
+.install button:hover{opacity:.9}.install button:active{transform:scale(.96)}
+.cta{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.cta a{padding:9px 16px;border:1px solid var(--line);border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;color:var(--fg);transition:border-color .15s,transform .15s}
+.cta a:hover{border-color:var(--acc);transform:translateY(-1px)}.cta a.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.layout{max-width:1100px;margin:0 auto;padding:8px 16px 64px;display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:40px}
+@media(max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}.toc{display:none}}
+.toc{position:sticky;top:76px;align-self:start;font-size:14px;border-left:1px solid var(--line);padding-left:16px}
+.toc p{margin:0 0 8px;font-weight:700;color:var(--mut);text-transform:uppercase;font-size:12px;letter-spacing:.06em}
+.toc ul{list-style:none;margin:0;padding:0}.toc li{margin:6px 0}.toc a{color:var(--mut);text-decoration:none}.toc a:hover{color:var(--fg)}
+main{min-width:0;overflow-wrap:anywhere}main pre code{overflow-wrap:normal}main img{max-width:100%;height:auto}
+main h2{margin-top:2.2em;padding-bottom:.3em;border-bottom:1px solid var(--line)}
+.anchor{margin-left:-1.1em;padding-right:.4em;text-decoration:none;opacity:0;color:var(--mut)}h2:hover .anchor,h3:hover .anchor,h4:hover .anchor{opacity:1}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:14px;line-height:1.5}
+code{font:0.9em ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--code);padding:.15em .35em;border-radius:5px}pre code{background:none;padding:0}
+table{border-collapse:collapse;display:block;overflow-x:auto;max-width:100%}th,td{border:1px solid var(--line);padding:8px 12px;text-align:left}th{background:var(--card)}
+blockquote{margin:1em 0;padding:.2em 1em;border-left:4px solid var(--line);color:var(--mut)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:14px}
+.foot-in{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;gap:16px;flex-wrap:wrap}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}</style>
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+<a class="brand" href="https://nirholas.github.io/three-ws-agents/">@three-ws/agents</a>
+<nav aria-label="Project links"><a href="https://github.com/nirholas/three-ws-agents">GitHub</a><a href="https://www.npmjs.com/package/@three-ws/agents">npm</a><a href="llms.txt">llms.txt</a><a href="https://three.ws">three.ws</a></nav>
+</div></header>
+<section class="hero">
+<h1>@three-ws/agents</h1>
+<p>TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.</p>
+<div class="install" role="group" aria-label="Install command"><code>npm install @three-ws/agents</code><button type="button" data-copy="npm install @three-ws/agents">Copy</button></div>
+<div class="cta"><a class="pri" href="https://github.com/nirholas/three-ws-agents">View on GitHub</a><a href="https://github.com/nirholas/three-ws-agents/stargazers">Star the repo</a></div>
+</section>
+<div class="layout">
+<main id="content"><h1>@three-ws/agents</h1>
+<p><strong>The typed TypeScript client for the three.ws v1 Agents API.</strong></p>
+<p>Construct a client with an API key, then create, start and chat with agents,
+run goals, schedule automations, and move funds from Solana agent wallets, with
+retries, timeouts, idempotency keys, typed errors and a client-side confirm gate
+on every call that moves money.</p>
+<pre><code class="language-ts">import { ThreeAgents } from &quot;@three-ws/agents&quot;;
+
+const client = new ThreeAgents({ apiKey: process.env.THREE_WS_API_KEY! });
+const agent = await client.createAgent({ name: &quot;Momentum Alpha&quot;, strategy: &quot;momentum&quot; });
+await client.startAgent(agent.id);
+const reply = await client.sendMessage(agent.id, { message: &quot;What is trending right now?&quot; });
+console.log(reply.content);
+</code></pre>
+<h2 id="contents"><a class="anchor" href="#contents" aria-label="Link to this section">#</a>Contents</h2>
+<ul>
+<li><a href="#status">Status</a></li>
+<li><a href="#install-and-build">Install and build</a></li>
+<li><a href="#getting-a-key">Getting a key</a></li>
+<li><a href="#runnable-example">Runnable example</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#core-concepts">Core concepts</a></li>
+<li><a href="#api-reference">API reference</a></li>
+<li><a href="#errors">Errors</a></li>
+<li><a href="#requirements">Requirements</a></li>
+</ul>
+<h2 id="status"><a class="anchor" href="#status" aria-label="Link to this section">#</a>Status</h2>
+<p>Read this before building on the package.</p>
+<ul>
+<li><strong>Not on npm yet.</strong> <code>@three-ws/agents</code> returns 404 from the registry. Build it
+from this directory (below) and depend on the built <code>dist/</code>. Publishing is an
+owner-approved step: <code>npm run release</code> from this directory runs <code>npm publish --access public</code>, and <code>prepublishOnly</code> gates it on <code>typecheck</code>, <code>test</code> and <code>build</code>.</li>
+<li><strong>The client is complete; most server routes are not mounted yet.</strong> On
+2026-10-08 production answered these methods: <code>getModels()</code> (<code>GET /models</code>),
+<code>getFreeTierStatus()</code> (<code>GET /me/free-tier</code>), <code>startAgent()</code> and <code>stopAgent()</code>
+(<code>POST /agents/:id/start|stop</code>). Every other method calls a <code>/api/v1</code> path that
+production answers with <code>404 not_found</code> (or, under <code>/agents/:id/...</code>, with the
+on-chain card resolver&#39;s <code>400 invalid_caip</code>). The server-side logic for those
+routes exists in <a href="https://github.com/nirholas/three-ws-agents/blob/main/./../api/_lib/agents-v1">api/_lib/agents-v1/</a> but has no
+route entry under <code>api/v1/</code> yet. The errors are typed, so a caller sees a
+<code>NotFoundError</code> or <code>ValidationError</code>, never a crash.</li>
+<li><code>npm test</code> (<code>vitest run packages/agents-sdk/tests</code>) and <code>npm run examples</code>
+(<code>scripts/run-examples.mjs</code>) name directories that are not in the tree; use
+<code>npm run typecheck</code> and <code>npm run build</code> to verify a change.</li>
+</ul>
+<h2 id="install-and-build"><a class="anchor" href="#install-and-build" aria-label="Link to this section">#</a>Install and build</h2>
+<p>From the repo root (<code>tsup</code> and <code>typescript</code> resolve from the root <code>node_modules</code>):</p>
+<pre><code class="language-bash">cd packages/agents-sdk
+npx tsup          # writes dist/index.js (ESM), dist/index.cjs (CJS) and .d.ts types
+npx tsc --noEmit  # type check
+</code></pre>
+<p>One entry, ESM and CJS, with declarations and source maps. The on-chain error
+classes are imported from <a href="https://github.com/nirholas/three-ws-agents/blob/main/./../solana-agent-sdk/src/errors.ts">solana-agent-sdk/src/errors.ts</a>
+by relative path and inlined by tsup, so the built package has <strong>zero runtime
+dependencies</strong>. It runs on Node 20+, Deno, Bun and browsers (anything with <code>fetch</code>).</p>
+<h2 id="getting-a-key"><a class="anchor" href="#getting-a-key" aria-label="Link to this section">#</a>Getting a key</h2>
+<p><code>apiKey</code> is a three.ws API key (<code>sk_live_...</code>). Create one with
+<code>npx three-ws setup</code> (<a href="https://github.com/nirholas/three-ws-agents/blob/main/./../docs/cli.md">docs/cli.md</a>) or on
+<a href="https://three.ws/dashboard/api">/dashboard/api</a>. Model calls need a key with the
+<code>inference</code> scope; agent writes need <code>agents:write</code>.</p>
+<h2 id="runnable-example"><a class="anchor" href="#runnable-example" aria-label="Link to this section">#</a>Runnable example</h2>
+<p>This runs today against production. Save it as <code>example.mjs</code> in this directory
+after building:</p>
+<pre><code class="language-js">import { ThreeAgents, ConfirmationRequiredError, VERSION } from &quot;./dist/index.js&quot;;
+
+const client = new ThreeAgents({ apiKey: process.env.THREE_WS_API_KEY ?? &quot;sk_live_example&quot; });
+console.log(VERSION, client.baseUrl); // 0.1.0 https://three.ws/api/v1
+
+// Free-tier allowance and the models it covers.
+console.log(await client.getFreeTierStatus());
+// { limit: 20, used: 0, remaining: 20, reset_at: &#39;...&#39;, anonymous: true, signed_in_limit: 100, models: [...] }
+
+// The model catalog.
+console.log(await client.getModels());
+
+// Fund-moving calls are refused before any request unless confirm is literally true.
+try {
+  await client.transfer(&quot;agent-id&quot;, { quoteId: &quot;q&quot; });
+} catch (err) {
+  console.log(err instanceof ConfirmationRequiredError, err.confirmFlag, err.previewMethod); // true confirm transferQuote
+}
+</code></pre>
+<pre><code class="language-bash">node example.mjs
+</code></pre>
+<h2 id="configuration"><a class="anchor" href="#configuration" aria-label="Link to this section">#</a>Configuration</h2>
+<pre><code class="language-ts">const client = new ThreeAgents({
+  apiKey: process.env.THREE_WS_API_KEY!, // required
+  baseUrl: &quot;https://three.ws/api/v1&quot;,    // default
+  timeout: 30_000,                        // per attempt, ms
+  retries: 2,                             // after the first attempt, on 5xx, network errors and timeouts
+  retryDelay: 1_000,                      // retry n waits retryDelay * 2^n plus up to 20% jitter
+  fetch: globalThis.fetch,                // any fetch implementation
+  headers: { &quot;x-team&quot;: &quot;research&quot; },      // sent on every request
+});
+</code></pre>
+<p>Every method takes <code>RequestOptions</code> as its last argument to override <code>timeout</code>
+or <code>retries</code>, pass an <code>AbortSignal</code>, or supply your own <code>idempotencyKey</code>.</p>
+<h2 id="core-concepts"><a class="anchor" href="#core-concepts" aria-label="Link to this section">#</a>Core concepts</h2>
+<p><strong>Agent lifecycle.</strong> <code>createAgent</code> (optionally from a <code>strategy</code> preset:
+<code>momentum</code>, <code>sniper</code>, <code>defi-yield</code>, <code>macro-hedge</code>, <code>monitor-exit</code>,
+<code>conservative</code>) creates an agent; a preset fills the skills, persona and default
+automations you leave out. An agent&#39;s status is <code>running</code> (its automations,
+intents and runs may execute) or <code>stopped</code>. <code>startAgent</code> and <code>stopAgent</code> switch
+between them without deleting anything; <code>deleteAgent</code> stops automations and
+cancels open runs.</p>
+<p><strong>Chat versus runs.</strong> <code>sendMessage</code> is one turn and returns the reply with
+usage, cost, tool calls and any transaction signatures. <code>createRun</code> hands the
+agent a goal and lets the server-side tool loop work toward it inside a credit
+budget, an on-chain budget and a step limit; follow it with <code>streamRun</code> (Server-Sent
+Events, resumed from the last event id when the connection drops) or <code>getRunSteps</code>.</p>
+<p><strong>Custodial versus non-custodial.</strong> <code>swapQuote</code> with an <code>agentId</code> trades from the
+agent&#39;s custodial wallet, and <code>swapExecute</code> then needs <code>confirm: true</code> and signs
+server-side. Without <code>agentId</code> the quote is built for your own wallet and
+<code>swapExecute</code> returns an unsigned base64 transaction for you to sign.</p>
+<p><strong>Money needs a preview and a yes.</strong> <code>transfer</code> and <code>setExternalWallet</code> throw
+<code>ConfirmationRequiredError</code> before any request unless their <code>confirm</code> flag is
+literally <code>true</code>. Call the preview method the error names (<code>transferQuote</code>,
+<code>getWallet</code>) and show the result first.</p>
+<p><strong>Idempotency.</strong> Every non-GET request carries an <code>Idempotency-Key</code> that is
+reused across retries, so a retried create, transfer or swap acts at most once.</p>
+<p><strong>Pagination.</strong> List methods return <code>Page&lt;T&gt;</code> (<code>data</code>, <code>hasMore</code>, <code>nextCursor</code>,
+<code>requestId</code>). <code>client.paginate(fetchPage)</code> walks every page:</p>
+<pre><code class="language-ts">for await (const agent of client.paginate((cursor) =&gt; client.listAgents({ cursor }))) console.log(agent.name);
+</code></pre>
+<h2 id="api-reference"><a class="anchor" href="#api-reference" aria-label="Link to this section">#</a>API reference</h2>
+<p>Paths are relative to <code>baseUrl</code>. Live means production answered it on 2026-10-08.</p>
+<h3 id="agents"><a class="anchor" href="#agents" aria-label="Link to this section">#</a>Agents</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>createAgent(params)</code></td>
+<td><code>POST /agents</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getAgent(agentId)</code></td>
+<td><code>GET /agents/:id</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listAgents({ limit, cursor })</code></td>
+<td><code>GET /agents</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>updateAgent(agentId, patch)</code></td>
+<td><code>PATCH /agents/:id</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>startAgent(agentId)</code></td>
+<td><code>POST /agents/:id/start</code></td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>stopAgent(agentId)</code></td>
+<td><code>POST /agents/:id/stop</code></td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>deleteAgent(agentId)</code></td>
+<td><code>DELETE /agents/:id</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="chat-and-runs"><a class="anchor" href="#chat-and-runs" aria-label="Link to this section">#</a>Chat and runs</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sendMessage(agentId, { message, model?, temperature? })</code></td>
+<td><code>POST /agents/:id/messages</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getMessages(agentId, { limit, before })</code></td>
+<td><code>GET /agents/:id/messages</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>createRun(agentId, { goal, budgetCreditsUsd?, budgetUsd?, maxSteps?, toolsAllowed?, schedule? })</code></td>
+<td><code>POST /agents/:id/runs</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listRuns(agentId, page)</code></td>
+<td><code>GET /agents/:id/runs</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getRun(runId)</code></td>
+<td><code>GET /runs/:id</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>updateRun(runId, params)</code></td>
+<td><code>PATCH /runs/:id</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>cancelRun(runId)</code></td>
+<td><code>POST /runs/:id/cancel</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getRunSteps(runId, page)</code></td>
+<td><code>GET /runs/:id/steps</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>streamRun(runId)</code></td>
+<td><code>GET /runs/:id/events</code> (SSE)</td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="skills"><a class="anchor" href="#skills" aria-label="Link to this section">#</a>Skills</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>listSkills()</code></td>
+<td><code>GET /skills</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listCommunitySkills({ q, tag, author, limit })</code></td>
+<td><code>GET /skills/community</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getCommunitySkill(slug)</code></td>
+<td><code>GET /skills/community/:slug</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listCustomSkills(agentId)</code>, <code>getCustomSkill(agentId, skillId)</code></td>
+<td><code>GET /agents/:id/skills/custom[/:skillId]</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>createCustomSkill</code>, <code>updateCustomSkill</code>, <code>deleteCustomSkill</code></td>
+<td><code>POST</code>, <code>PATCH</code>, <code>DELETE /agents/:id/skills/custom[/:skillId]</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>importCommunitySkill(agentId, slug, { enabled })</code></td>
+<td><code>POST /agents/:id/skills/custom/import</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="automations"><a class="anchor" href="#automations" aria-label="Link to this section">#</a>Automations</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>createAutomation(params)</code></td>
+<td><code>POST /automations</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listAutomations(agentId, page)</code></td>
+<td><code>GET /agents/:id/automations</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>deleteAutomation(automationId)</code></td>
+<td><code>DELETE /automations/:id</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="intelligence"><a class="anchor" href="#intelligence" aria-label="Link to this section">#</a>Intelligence</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getPrice(mint)</code></td>
+<td><code>GET /intel/price</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getTopMovers(params)</code></td>
+<td><code>GET /intel/top-movers</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getIndicators({ mint, indicators, interval })</code></td>
+<td><code>GET /intel/indicators</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getSignals(mint)</code></td>
+<td><code>GET /intel/signals</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getAnomalies()</code>, <code>getMacro()</code></td>
+<td><code>GET /intel/anomalies</code>, <code>GET /intel/macro</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="catalog-and-account"><a class="anchor" href="#catalog-and-account" aria-label="Link to this section">#</a>Catalog and account</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getModels()</code></td>
+<td><code>GET /models</code></td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>getFreeTierStatus()</code></td>
+<td><code>GET /me/free-tier</code></td>
+<td>yes</td>
+</tr>
+<tr>
+<td><code>getUsage()</code>, <code>getBudget()</code></td>
+<td><code>GET /me/usage</code>, <code>GET /me/budget</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getTransactions(page)</code></td>
+<td><code>GET /me/transactions</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>listIntegrations()</code>, <code>saveIntegration(provider, params)</code>, <code>removeIntegration(provider)</code></td>
+<td><code>/me/integrations[/:provider]</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>generateLinkCode(params)</code>, <code>redeemLinkCode({ code })</code></td>
+<td><code>POST /me/link-code[/redeem]</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>setExternalWallet(agentId, { ..., confirm: true })</code></td>
+<td><code>PUT /agents/:id/external-wallet</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<h3 id="wallet-and-swap"><a class="anchor" href="#wallet-and-swap" aria-label="Link to this section">#</a>Wallet and swap</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Route</th>
+<th>Live</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getWallet(agentId, { network })</code></td>
+<td><code>GET /agents/:id/wallet</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>getWalletHistory(agentId, { limit, cursor, network, category })</code></td>
+<td><code>GET /agents/:id/wallet/history</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>transferQuote(agentId, params)</code></td>
+<td><code>POST /agents/:id/wallet/transfer/quote</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>transfer(agentId, { quoteId, confirm: true })</code></td>
+<td><code>POST /agents/:id/wallet/transfer</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>swapQuote(params)</code></td>
+<td><code>POST /swap/quote</code></td>
+<td>no</td>
+</tr>
+<tr>
+<td><code>swapExecute(params)</code></td>
+<td><code>POST /swap/execute</code></td>
+<td>no</td>
+</tr>
+</tbody></table>
+<p>Request and response types for every method are exported from the package
+(<code>CreateAgentParams</code>, <code>MessageReply</code>, <code>Run</code>, <code>RunEvent</code>, <code>SwapQuote</code>, <code>Wallet</code>,
+<code>Page&lt;T&gt;</code> and the rest, from <a href="https://github.com/nirholas/three-ws-agents/blob/main/src/types.ts">src/types.ts</a>).</p>
+<h2 id="errors"><a class="anchor" href="#errors" aria-label="Link to this section">#</a>Errors</h2>
+<p>Every HTTP failure is a subclass of <code>ThreeAgentsError</code> carrying <code>status</code>, the
+stable <code>code</code>, the <code>requestId</code> (quote it to support), the envelope&#39;s <code>details</code>,
+the <code>rateLimit</code> headers, <code>method</code> and <code>path</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>AuthenticationError</code></td>
+<td>401: key missing, malformed, revoked or expired.</td>
+</tr>
+<tr>
+<td><code>PermissionError</code></td>
+<td>403: key lacks a scope (<code>scope</code> names it) or the resource is someone else&#39;s.</td>
+</tr>
+<tr>
+<td><code>NotFoundError</code></td>
+<td>404.</td>
+</tr>
+<tr>
+<td><code>ValidationError</code></td>
+<td>400/422, with per-field <code>fields</code>. Also thrown client-side for an empty id.</td>
+</tr>
+<tr>
+<td><code>RateLimitError</code></td>
+<td>429, with <code>retryAfter</code> in seconds.</td>
+</tr>
+<tr>
+<td><code>InsufficientFundsError</code></td>
+<td>The wallet or credit balance cannot cover the call.</td>
+</tr>
+<tr>
+<td><code>ConfirmationRequiredError</code></td>
+<td>A fund-moving call without its confirm flag; names <code>confirmFlag</code> and <code>previewMethod</code>.</td>
+</tr>
+<tr>
+<td><code>ServerError</code></td>
+<td>5xx after the retries are spent.</td>
+</tr>
+<tr>
+<td><code>TimeoutError</code></td>
+<td>An attempt exceeded <code>timeout</code> (<code>timeoutMs</code>).</td>
+</tr>
+<tr>
+<td><code>ConnectionError</code></td>
+<td>The request never got a response.</td>
+</tr>
+</tbody></table>
+<p>On-chain failures reuse the classes from <code>@three-ws/solana-agent</code>:
+<code>SolanaAgentError</code>, <code>SwapError</code>, <code>SimulationError</code>, <code>ConfirmationTimeoutError</code>,
+<code>TransactionRejectedError</code>, <code>WalletNotConnectedError</code>, <code>WalletCapabilityError</code>,
+<code>MissingTokenAccountError</code>.</p>
+<pre><code class="language-ts">import { RateLimitError, ThreeAgentsError } from &quot;@three-ws/agents&quot;;
+
+try {
+  await client.getFreeTierStatus();
+} catch (err) {
+  if (err instanceof RateLimitError) console.log(`retry in ${err.retryAfter}s`);
+  else if (err instanceof ThreeAgentsError) console.log(err.status, err.code, err.requestId);
+  else throw err;
+}
+</code></pre>
+<p>Also exported: <code>parseSse(stream)</code> (the SSE parser <code>streamRun</code> uses), <code>VERSION</code>,
+<code>DEFAULT_BASE_URL</code>, and the <code>FetchLike</code> and <code>ResponseMeta</code> types.</p>
+<h2 id="requirements"><a class="anchor" href="#requirements" aria-label="Link to this section">#</a>Requirements</h2>
+<p>Node 20+ (or any runtime with <code>fetch</code>, <code>AbortSignal</code> and <code>ReadableStream</code>).</p>
+<h2 id="related"><a class="anchor" href="#related" aria-label="Link to this section">#</a>Related</h2>
+<ul>
+<li><a href="https://github.com/nirholas/three-ws-agents/blob/main/./../docs/api-reference.md">docs/api-reference.md</a>: the HTTP API.</li>
+<li><a href="https://github.com/nirholas/three-ws-agents/blob/main/./../solana-agent-sdk">solana-agent-sdk/</a>: wallet and swap primitives, and the on-chain error classes.</li>
+<li><a href="https://github.com/nirholas/three-ws-agents/blob/main/./three-ws-cli">packages/three-ws-cli</a>: <code>npx three-ws setup</code> mints the key.</li>
+</ul>
+<h2 id="license"><a class="anchor" href="#license" aria-label="Link to this section">#</a>License</h2>
+<p>Apache-2.0. See <a href="https://github.com/nirholas/three-ws-agents/blob/main/LICENSE">LICENSE</a>.</p>
+</main>
+<nav class="toc" aria-label="On this page"><p>On this page</p><ul><li><a href="#contents">Contents</a></li><li><a href="#status">Status</a></li><li><a href="#install-and-build">Install and build</a></li><li><a href="#getting-a-key">Getting a key</a></li><li><a href="#runnable-example">Runnable example</a></li><li><a href="#configuration">Configuration</a></li><li><a href="#core-concepts">Core concepts</a></li><li><a href="#api-reference">API reference</a></li><li><a href="#errors">Errors</a></li><li><a href="#requirements">Requirements</a></li><li><a href="#related">Related</a></li><li><a href="#license">License</a></li></ul></nav>
+</div>
+<footer><div class="foot-in"><span>Apache-2.0 licensed</span><a href="https://github.com/nirholas/three-ws-agents/issues">Issues</a><a href="https://github.com/nirholas/three-ws-agents/blob/main/CONTRIBUTING.md">Contributing</a><a href="https://github.com/nirholas/three-ws-agents/security/policy">Security</a><a href="https://three.ws">Part of three.ws</a></div></footer>
+<script>document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+var t=b.getAttribute('data-copy');var done=function(){var o=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=o},1400)};
+if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,function(){})}
+else{var a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(e){}a.remove()}})});</script>
+</body>
+</html>

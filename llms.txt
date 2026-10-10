@@ -1,0 +1,19 @@
+# @three-ws/agents
+
+> TypeScript SDK for the three.ws v1 Agents API: create, start and chat with AI agents, run goals, automate, and trade from Solana agent wallets.
+
+@three-ws/agents is a JavaScript library from three.ws. Install: `npm install @three-ws/agents`.
+
+## Docs
+
+- [README](https://github.com/nirholas/three-ws-agents/blob/main/README.md): install, configuration, full reference
+- [Documentation site](https://nirholas.github.io/three-ws-agents/): the README as a web page
+- [Full text for LLMs](https://nirholas.github.io/three-ws-agents/llms-full.txt): README inlined
+- [AGENTS.md](https://github.com/nirholas/three-ws-agents/blob/main/AGENTS.md): guidance for coding agents
+
+## Project
+
+- [Source](https://github.com/nirholas/three-ws-agents)
+- [npm](https://www.npmjs.com/package/@three-ws/agents)
+- [three.ws](https://three.ws): the platform this is part of
+- [Issues](https://github.com/nirholas/three-ws-agents/issues)
